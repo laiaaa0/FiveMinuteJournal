@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Five Minute Journal</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">Landing Page</string>
+    <string name="second_fragment_label">Journal Entry</string>
+    <string name="next">Next</string>
+    <string name="today_entry">Today\'s Entry</string>
+    <string name="previous_entries">Previous Entries</string>
+
+    <string name="lorem_ipsum">
+        Lorem ipsum dolor sit amet
+    </string>
+    <string name="gratitude_label">I am grateful for…</string>
+    <string name="today_label">What would make today great?</string>
+    <string name="affirmation_label">Daily affirmation</string>
+    <string name="intentions_text">Set 3 intentions for the day</string>
+    <string name="gratitude_text">Write 3 things you\'re grateful for</string>
+    <string name="affirmations_text">Affirm yourself</string>
+    <string name="morning_reflection_text">Morning Reflection ☀️</string>
+    <string name="evening_reflection_text">Evening Reflection 🌙</string>
+    <string name="amazing_label">3 amazing things that happened today…</string>
+    <string name="amazing_text">Recall 3 highlights</string>
+    <string name="improvement_label">How could I have made today even better?</string>
+    <string name="improvement_text">Reflect on improvements</string>
+    <string name="save_text">Save</string>
+
+
+</resources>
