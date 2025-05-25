@@ -57,20 +57,8 @@ class JournalEntry : Fragment() {
             json.put("gratitude", gratitudeInput.text.toString())
             json.put("intentions", intentionsInput.text.toString())
             json.put("affirmation", affirmInput.text.toString())
-            // Save text to internal storage
-            val dateStr: String = SimpleDateFormat("yyyyMMdd").format(Date())
 
-            // Define the subdirectory "potato"
-            val subdirectory = File(requireContext().filesDir, dateStr)
-
-            // Create the directory if it doesn't exist
-            if (!subdirectory.exists()) {
-                subdirectory.mkdirs()
-            }
-            // Define the file inside "potato" folder
-            val file = File(subdirectory, "morning_$dateStr.json")
-            file.writeText(json.toString())
-
+            DataManager.onAddEntry(json, kMorning);
             // Disable the button
             morningSaveButton.isEnabled = false
         }
@@ -81,19 +69,8 @@ class JournalEntry : Fragment() {
             val json = JSONObject()
             json.put("highlights", highlightsInput.text.toString())
             json.put("improvements", improvementsInput.text.toString())
-            // Save text to internal storage
-            val dateStr: String = SimpleDateFormat("yyyyMMdd").format(Date())
 
-            // Define the subdirectory "potato"
-            val subdirectory = File(requireContext().filesDir, dateStr)
-
-            // Create the directory if it doesn't exist
-            if (!subdirectory.exists()) {
-                subdirectory.mkdirs()
-            }
-            // Define the file inside "potato" folder
-            val file = File(subdirectory, "evening_$dateStr.json")
-            file.writeText(json.toString())
+            DataManager.onAddEntry(json, kEvening);
 
             // Disable the button
             eveningSaveButton.isEnabled = false
