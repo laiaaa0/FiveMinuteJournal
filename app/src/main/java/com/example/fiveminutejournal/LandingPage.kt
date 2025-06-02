@@ -35,6 +35,9 @@ class LandingPage : Fragment() {
         binding.buttonToday.setOnClickListener {
             findNavController().navigate(R.id.action_LandingPage_to_SecondFragment)
         }
+        binding.buttonPrevious.setOnClickListener{
+            findNavController().navigate(R.id.action_LandingPage_to_journalEntryList)
+        }
     }
 
     override fun onDestroyView() {

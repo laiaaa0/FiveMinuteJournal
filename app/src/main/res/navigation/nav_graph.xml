@@ -14,6 +14,9 @@
         <action
             android:id="@+id/action_LandingPage_to_SecondFragment"
             app:destination="@id/SecondFragment" />
+        <action
+            android:id="@+id/action_LandingPage_to_journalEntryList"
+            app:destination="@id/journalEntryList" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
@@ -24,5 +27,19 @@
         <action
             android:id="@+id/action_SecondFragment_to_LandingPage"
             app:destination="@id/LandingPage" />
+    </fragment>
+    <fragment
+        android:id="@+id/oldJournalEntry"
+        android:name="com.example.fiveminutejournal.OldJournalEntry"
+        android:label="fragment_old_journal_entry"
+        tools:layout="@layout/fragment_old_journal_entry" />
+    <fragment
+        android:id="@+id/journalEntryList"
+        android:name="com.example.fiveminutejournal.JournalEntryList"
+        android:label="fragment_journal_entry_list"
+        tools:layout="@layout/fragment_journal_entry_list" >
+        <action
+            android:id="@+id/action_journalEntryList_to_oldJournalEntry"
+            app:destination="@id/oldJournalEntry" />
     </fragment>
 </navigation>

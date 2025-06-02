@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.Fragment
 import com.example.fiveminutejournal.databinding.FragmentSecondBinding
+import com.example.fiveminutejournal.DataManager
 import org.json.JSONObject
 import java.io.File
 
@@ -24,7 +25,7 @@ class JournalEntry : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-
+    //private val dataManager = DataManager(requireContext())
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -57,8 +58,7 @@ class JournalEntry : Fragment() {
             json.put("gratitude", gratitudeInput.text.toString())
             json.put("intentions", intentionsInput.text.toString())
             json.put("affirmation", affirmInput.text.toString())
-
-            DataManager.onAddEntry(json, kMorning);
+            //dataManager.onAddNewEntry(json, EntryType.kMorning);
             // Disable the button
             morningSaveButton.isEnabled = false
         }
@@ -69,8 +69,7 @@ class JournalEntry : Fragment() {
             val json = JSONObject()
             json.put("highlights", highlightsInput.text.toString())
             json.put("improvements", improvementsInput.text.toString())
-
-            DataManager.onAddEntry(json, kEvening);
+            //dataManager.onAddNewEntry(json, EntryType.kEvening);
 
             // Disable the button
             eveningSaveButton.isEnabled = false

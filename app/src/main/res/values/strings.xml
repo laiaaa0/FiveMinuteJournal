@@ -24,6 +24,8 @@
     <string name="improvement_label">How could I have made today even better?</string>
     <string name="improvement_text">Reflect on improvements</string>
     <string name="save_text">Save</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>
