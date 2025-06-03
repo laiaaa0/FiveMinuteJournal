@@ -101,10 +101,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="top"
-                android:hint="@string/amazing_text"
-                android:importantForAutofill="no"
-                android:inputType="textMultiLine"
-                android:minLines="3"
                 android:padding="8dp" />
 
             <!-- How could I have made today even better -->
@@ -120,10 +116,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="top"
-                android:hint="@string/improvement_text"
-                android:importantForAutofill="no"
-                android:inputType="textMultiLine"
-                android:minLines="2"
                 android:padding="8dp" />
 
 
