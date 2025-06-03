@@ -5,7 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
+import androidx.navigation.fragment.navArgs
+import org.json.JSONObject
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,6 +24,7 @@ class OldJournalEntry : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    val args: OldJournalEntryArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +34,7 @@ class OldJournalEntry : Fragment() {
         }
     }
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,7 +42,28 @@ class OldJournalEntry : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_old_journal_entry, container, false)
 
-        //Toast.makeText(requireContext(), "Date is ${param1} and content is ${param2}", Toast.LENGTH_LONG).show()
+        val jsonObject = JSONObject(args.content)
+        if (jsonObject.has("morning")){
+            val morningObject = JSONObject(jsonObject.getString("morning"))
+
+            val gratitude = morningObject.optString("gratitude")
+            val intentions = morningObject.optString("intentions")
+            val affirmation = morningObject.optString("affirmation")
+            view.findViewById<TextView>(R.id.gratitude_text).setText(gratitude)
+            view.findViewById<TextView>(R.id.today_great_text).setText(intentions)
+            view.findViewById<TextView>(R.id.affirmation_text).setText(affirmation)
+
+        }
+        if (jsonObject.has("evening")){
+            val eveningObject = JSONObject(jsonObject.getString("evening"))
+            val highlight = eveningObject.optString("highlights")
+            val improvement = eveningObject.optString("improvements")
+
+            view.findViewById<TextView>(R.id.amazing_things_text).setText(highlight)
+            view.findViewById<TextView>(R.id.better_today_text).setText(improvement)
+
+        }
+        //Toast.makeText(requireContext(), "Date is ${args.date} and content is ${args.content}", Toast.LENGTH_LONG).show()
         return view
     }
 

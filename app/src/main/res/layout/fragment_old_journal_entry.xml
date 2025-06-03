@@ -39,10 +39,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="top"
-                android:hint="@string/gratitude_text"
-                android:importantForAutofill="no"
-                android:inputType="textMultiLine"
-                android:minLines="3"
                 android:padding="8dp" />
 
             <!-- What would make today great -->
@@ -57,11 +53,7 @@
                 android:id="@+id/today_great_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:autofillHints=""
                 android:gravity="top"
-                android:hint="@string/intentions_text"
-                android:inputType="textMultiLine"
-                android:minLines="3"
                 android:padding="8dp" />
 
             <!-- Daily affirmation -->
@@ -77,16 +69,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="top"
-                android:hint="@string/affirmations_text"
-                android:importantForAutofill="no"
-                android:inputType="textMultiLine"
-                android:minLines="2"
                 android:padding="8dp" />
-            <Button
-                android:id="@+id/saveMorning"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/save_text" />
         </LinearLayout>
 
         <LinearLayout
@@ -143,11 +126,6 @@
                 android:minLines="2"
                 android:padding="8dp" />
 
-            <Button
-                android:id="@+id/saveEvening"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/save_text" />
 
         </LinearLayout>
     </LinearLayout>

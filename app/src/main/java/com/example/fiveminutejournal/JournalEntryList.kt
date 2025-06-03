@@ -41,14 +41,8 @@ class JournalEntryList : Fragment() {
             calendar.set(year, month, dayOfMonth, 0, 0, 0)
             calendar.set(Calendar.MILLISECOND, 0)
             try{
-
-
-
                 val entry = dataManager.onRetrieveEntry(calendar.time)
-                val parameter = calendar.time
-                val parameter2 = entry
-                val action = JournalEntryListDirections.actionJournalEntryListToOldJournalEntry()
-
+                val action = JournalEntryListDirections.actionJournalEntryListToOldJournalEntry(calendar.time.toString(), entry.toString())
                 findNavController().navigate(action)
             }
             catch (e:Exception){

@@ -32,7 +32,10 @@
         android:id="@+id/oldJournalEntry"
         android:name="com.example.fiveminutejournal.OldJournalEntry"
         android:label="Previous Entry"
-        tools:layout="@layout/fragment_old_journal_entry" />
+        tools:layout="@layout/fragment_old_journal_entry" >
+        <argument android:name="date" />
+        <argument android:name="content" />
+    </fragment>
     <fragment
         android:id="@+id/journalEntryList"
         android:name="com.example.fiveminutejournal.JournalEntryList"
