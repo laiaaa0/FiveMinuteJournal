@@ -25,13 +25,15 @@ class JournalEntry : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-    //private val dataManager = DataManager(requireContext())
+
+    private lateinit var dataManager: DataManager
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
 
         _binding = FragmentSecondBinding.inflate(inflater, container, false)
+        dataManager = DataManager(requireContext())
         return binding.root
 
     }
@@ -58,7 +60,7 @@ class JournalEntry : Fragment() {
             json.put("gratitude", gratitudeInput.text.toString())
             json.put("intentions", intentionsInput.text.toString())
             json.put("affirmation", affirmInput.text.toString())
-            //dataManager.onAddNewEntry(json, EntryType.kMorning);
+            dataManager.onAddNewEntry(json, EntryType.kMorning);
             // Disable the button
             morningSaveButton.isEnabled = false
         }
@@ -69,7 +71,7 @@ class JournalEntry : Fragment() {
             val json = JSONObject()
             json.put("highlights", highlightsInput.text.toString())
             json.put("improvements", improvementsInput.text.toString())
-            //dataManager.onAddNewEntry(json, EntryType.kEvening);
+            dataManager.onAddNewEntry(json, EntryType.kEvening);
 
             // Disable the button
             eveningSaveButton.isEnabled = false

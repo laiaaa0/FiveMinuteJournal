@@ -1,7 +1,6 @@
 package com.example.fiveminutejournal
 import android.content.Context
 import android.util.Log
-import androidx.core.content.ContentProviderCompat.requireContext
 import org.json.JSONObject
 import java.io.File
 import java.text.SimpleDateFormat

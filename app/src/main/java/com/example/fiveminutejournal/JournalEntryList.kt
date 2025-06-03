@@ -5,8 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CalendarView
+import android.widget.EditText
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
-
+import java.util.Calendar
+import java.util.Date
 /**
  * A simple [Fragment] subclass.
  * Use the [JournalEntryList.newInstance] factory method to
@@ -14,6 +18,7 @@ import androidx.navigation.fragment.findNavController
  */
 class JournalEntryList : Fragment() {
 
+    private lateinit var dataManager: DataManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -24,12 +29,35 @@ class JournalEntryList : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_journal_entry_list, container, false)
+        val view = inflater.inflate(R.layout.fragment_journal_entry_list, container, false)
+
+        dataManager = DataManager(requireContext())
+        // Find the CalendarView
+        val calendarView = view.findViewById<CalendarView>(R.id.calendarView)
+
+        // Set date change listener
+        calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
+            val calendar = Calendar.getInstance()
+            calendar.set(year, month, dayOfMonth, 0, 0, 0)
+            calendar.set(Calendar.MILLISECOND, 0)
+            try{
+
+
+
+                val entry = dataManager.onRetrieveEntry(calendar.time)
+                val parameter = calendar.time
+                val parameter2 = entry
+                val action = JournalEntryListDirections.actionJournalEntryListToOldJournalEntry()
+
+                findNavController().navigate(action)
+            }
+            catch (e:Exception){
+                Toast.makeText(requireContext(), "${e.message}", Toast.LENGTH_SHORT).show()
+            }
+
+        }
+        return view
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-    }
 
 }

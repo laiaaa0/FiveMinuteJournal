@@ -31,7 +31,7 @@
     <fragment
         android:id="@+id/oldJournalEntry"
         android:name="com.example.fiveminutejournal.OldJournalEntry"
-        android:label="fragment_old_journal_entry"
+        android:label="Previous Entry"
         tools:layout="@layout/fragment_old_journal_entry" />
     <fragment
         android:id="@+id/journalEntryList"
