@@ -50,11 +50,13 @@ class DataManager(private val context: Context){
             throw IllegalArgumentException("No entries")
         }
 
-        val morning_file = File(subdirectory, "morning_$dateStr.json")
-        val morningJson = JSONObject(morning_file.readText())
+        val morningFile = File(subdirectory, "morning_$dateStr.json")
 
-        val evening_file = File(subdirectory, "evening_$dateStr.json")
-        val eveningJson = JSONObject(evening_file.readText())
+
+        val morningJson = if (morningFile.exists()) JSONObject(morningFile.readText()) else JSONObject();
+
+        val eveningFile = File(subdirectory, "evening_$dateStr.json")
+        val eveningJson = if (eveningFile.exists()) JSONObject(eveningFile.readText()) else JSONObject()
         val result = JSONObject()
         result.put("morning", morningJson)
         result.put("evening", eveningJson)
