@@ -49,7 +49,8 @@ class JournalEntry : Fragment() {
         _binding = FragmentSecondBinding.inflate(inflater, container, false)
         dataManager = DataManager(requireContext())
         val currentTime = Date();
-        val todayEntry = dataManager.onRetrieveEntry(currentTime)
+
+        val todayEntry :JSONObject = try{ dataManager.onRetrieveEntry(currentTime)} catch (e:Exception){JSONObject()}
 
         showMorning = todayEntry.isNull("morning")  && isTimeInRange(currentTime, 0, 11);
         showEvening = todayEntry.isNull("evening") && isTimeInRange(currentTime, 12, 23)
