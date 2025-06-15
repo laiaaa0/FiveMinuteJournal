@@ -27,6 +27,9 @@
         <action
             android:id="@+id/action_SecondFragment_to_LandingPage"
             app:destination="@id/LandingPage" />
+        <action
+            android:id="@+id/action_SecondFragment_to_entryComplete"
+            app:destination="@id/entryComplete" />
     </fragment>
     <fragment
         android:id="@+id/oldJournalEntry"
@@ -44,5 +47,15 @@
         <action
             android:id="@+id/action_journalEntryList_to_oldJournalEntry"
             app:destination="@id/oldJournalEntry" />
+    </fragment>
+    <fragment
+        android:id="@+id/entryComplete"
+        android:name="com.example.fiveminutejournal.EntryComplete"
+        android:label="Entry complete"
+        tools:layout="@layout/fragment_entry_complete" >
+        <argument android:name="status" />
+        <action
+            android:id="@+id/action_entryComplete_to_LandingPage"
+            app:destination="@id/LandingPage" />
     </fragment>
 </navigation>

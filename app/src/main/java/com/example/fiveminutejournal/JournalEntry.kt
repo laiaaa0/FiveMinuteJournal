@@ -10,6 +10,7 @@ import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.fiveminutejournal.databinding.FragmentSecondBinding
 import com.example.fiveminutejournal.DataManager
 import org.json.JSONObject
@@ -56,8 +57,8 @@ class JournalEntry : Fragment() {
         showEvening = todayEntry.isNull("evening") && isTimeInRange(currentTime, 12, 23)
 
         if (!showMorning && !showEvening){
-            Toast.makeText(requireContext(), "You've completed your 5 minute journal today", Toast.LENGTH_LONG).show()
-
+            val action = JournalEntryDirections.actionSecondFragmentToEntryComplete(toString(makeStatus(todayEntry, currentTime)))
+            findNavController().navigate(action)
         }
         return binding.root
 
