@@ -14,8 +14,7 @@
         <ImageView
             android:id="@+id/image"
             android:layout_width="match_parent"
-            android:layout_height="456dp"
-            android:src="@android:drawable/star_big_on" />
+            android:layout_height="456dp"/>
 
         <TextView
             android:id="@+id/textView"
@@ -23,5 +22,11 @@
             android:layout_height="wrap_content"
             android:textAlignment="center"
             android:textSize="34sp" />
+
+        <Button
+            android:id="@+id/homeButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="@string/home_button" />
     </LinearLayout>
 </FrameLayout>

@@ -94,6 +94,9 @@ class JournalEntry : Fragment() {
             dataManager.onAddNewEntry(json, EntryType.kMorning);
             // Disable the button
             morningSaveButton.isEnabled = false
+            val action = JournalEntryDirections.actionSecondFragmentToEntryComplete(toString(makeStatus(dataManager.onRetrieveEntry(Date()),  Date())))
+            findNavController().navigate(action)
+
         }
 
         eveningSaveButton.setOnClickListener {
@@ -106,6 +109,8 @@ class JournalEntry : Fragment() {
 
             // Disable the button
             eveningSaveButton.isEnabled = false
+            val action = JournalEntryDirections.actionSecondFragmentToEntryComplete(toString(makeStatus(dataManager.onRetrieveEntry(Date()),  Date())))
+            findNavController().navigate(action)
         }
 
 

@@ -29,6 +29,7 @@
     <string name="morning_complete">Have a wonderful day!</string>
     <string name="evening_complete">Have a restful night!</string>
     <string name="all_complete">You have completed your 5 minute journal today</string>
+    <string name="home_button">Back to home</string>
 
 
 </resources>
