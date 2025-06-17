@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 
@@ -55,6 +56,16 @@ class EntryComplete : Fragment() {
         return view
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        (activity as AppCompatActivity).supportActionBar?.hide()
+
+    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        // Show the toolbar again
+        (activity as AppCompatActivity).supportActionBar?.show()
+    }
     companion object {
         /**
          * Use this factory method to create a new instance of
