@@ -43,6 +43,8 @@ class EntryComplete : Fragment() {
                 view.findViewById<TextView>(R.id.textView).setText(R.string.evening_complete)
                 view.findViewById<ImageView>(R.id.image).setImageResource(R.drawable.night)
             }
+            JournalEntryStatus.TIME_FOR_MORNING_ENTRY->{}
+            JournalEntryStatus.TIME_FOR_EVENING_ENTRY->{}
             JournalEntryStatus.NONE->{}
         }
         val homeButton = view.findViewById<Button>(R.id.homeButton)

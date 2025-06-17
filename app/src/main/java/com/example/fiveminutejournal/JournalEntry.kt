@@ -23,13 +23,6 @@ import java.util.Date
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
 
-fun isTimeInRange(date:Date, startHour :Int, endHour:Int):Boolean{
-    val calendar = Calendar.getInstance()
-    calendar.time = date
-    val hour = calendar.get(Calendar.HOUR_OF_DAY)  // 0-23
-    return hour in startHour..endHour
-}
-
 
 class JournalEntry : Fragment() {
 
@@ -40,8 +33,8 @@ class JournalEntry : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var dataManager: DataManager
-    private var showMorning = true;
-    private var showEvening = true;
+    private var status = JournalEntryStatus.NONE
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -53,10 +46,10 @@ class JournalEntry : Fragment() {
 
         val todayEntry :JSONObject = try{ dataManager.onRetrieveEntry(currentTime)} catch (e:Exception){JSONObject()}
 
-        showMorning = todayEntry.isNull("morning")  && isTimeInRange(currentTime, 0, 11);
-        showEvening = todayEntry.isNull("evening") && isTimeInRange(currentTime, 12, 23)
+        status = makeStatus(todayEntry, currentTime);
 
-        if (!showMorning && !showEvening){
+        if (status!=JournalEntryStatus.TIME_FOR_MORNING_ENTRY &&
+            status!=JournalEntryStatus.TIME_FOR_EVENING_ENTRY){
             val action = JournalEntryDirections.actionSecondFragmentToEntryComplete(toString(makeStatus(todayEntry, currentTime)))
             findNavController().navigate(action)
         }
@@ -81,8 +74,8 @@ class JournalEntry : Fragment() {
         val morningLayout = view.findViewById<LinearLayout>(R.id.morning_layout)
         val eveningLayout = view.findViewById<LinearLayout>(R.id.evening_layout)
 
-        morningLayout.visibility = if (showMorning) View.VISIBLE else View.GONE;
-        eveningLayout.visibility = if (showEvening) View.VISIBLE else View.GONE;
+        morningLayout.visibility = if (status==JournalEntryStatus.TIME_FOR_MORNING_ENTRY) View.VISIBLE else View.GONE;
+        eveningLayout.visibility = if (status==JournalEntryStatus.TIME_FOR_EVENING_ENTRY) View.VISIBLE else View.GONE;
 
         morningSaveButton.setOnClickListener {
 
