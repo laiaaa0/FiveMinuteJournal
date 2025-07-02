@@ -38,23 +38,22 @@ fun makeStatus(todayEntry : JSONObject, currentTime: Date) : JournalEntryStatus{
 
     val hasMorning = todayEntry.has("morning") && todayEntry.getString("morning")!=""&& todayEntry.getString("morning")!="{}"
     val hasEvening = todayEntry.has("evening")&& todayEntry.getString("evening")!="" && todayEntry.getString("evening")!="{}"
+    val isTimeForMorning = isTimeInRange(currentTime, 0,11);
+    val isTimeForEvening = isTimeInRange(currentTime, 12,23);
 
     if (hasMorning && hasEvening){
         return JournalEntryStatus.COMPLETE;
     }
-    else if (hasMorning){ // Does not have evening
-        if (isTimeInRange(currentTime, 12,23)){
-            return JournalEntryStatus.TIME_FOR_EVENING_ENTRY
-        }
-        return JournalEntryStatus.MORNING_COMPLETE
+    if (hasMorning && !isTimeForEvening){
+       return JournalEntryStatus.MORNING_COMPLETE;
     }
-    else if (hasEvening){ // Does not have morning
-        return JournalEntryStatus.EVENING_COMPLETE
+    if (hasEvening){
+        return JournalEntryStatus.EVENING_COMPLETE;
     }
 
-    if (isTimeInRange(currentTime, 0,11)){
-        return JournalEntryStatus.TIME_FOR_MORNING_ENTRY
-    }
+    // None of the entries
+    if (isTimeForMorning) {return JournalEntryStatus.TIME_FOR_MORNING_ENTRY;}
+    if (isTimeForEvening) {return JournalEntryStatus.TIME_FOR_EVENING_ENTRY;}
     return JournalEntryStatus.NONE
 }
 fun toString(status:JournalEntryStatus):String{
