@@ -1,5 +1,7 @@
 package com.example.fiveminutejournal
 
+import android.content.SharedPreferences
+import androidx.preference.PreferenceManager
 import org.json.JSONObject
 import java.util.Calendar
 import java.util.Date
@@ -34,12 +36,26 @@ fun isTimeInRange(date:Date, startHour :Int, endHour:Int):Boolean{
     return hour in startHour..endHour
 }
 
-fun makeStatus(todayEntry : JSONObject, currentTime: Date) : JournalEntryStatus{
+fun getPreferredTime(key:String, default:String, prefs: SharedPreferences):Int{
+    val time = prefs.getString(key,default)
+    val parts = time!!.split(":")
+    val hour = parts[0].toInt()
+    val minute = parts[1].toInt()
+    return hour
+}
+
+fun makeStatus(todayEntry : JSONObject, currentTime: Date, preferences:SharedPreferences) : JournalEntryStatus{
 
     val hasMorning = todayEntry.has("morning") && todayEntry.getString("morning")!=""&& todayEntry.getString("morning")!="{}"
     val hasEvening = todayEntry.has("evening")&& todayEntry.getString("evening")!="" && todayEntry.getString("evening")!="{}"
-    val isTimeForMorning = isTimeInRange(currentTime, 0,11);
-    val isTimeForEvening = isTimeInRange(currentTime, 12,23);
+
+    val morningStart = getPreferredTime("morning_start","06:00", preferences)
+    val morningEnd = getPreferredTime("morning_end", "14:00", preferences)
+    val eveningStart = getPreferredTime("evening_start","19:00", preferences)
+    val eveningEnd = getPreferredTime("evening_end", "23:00", preferences)
+
+    val isTimeForMorning = isTimeInRange(currentTime, morningStart,morningEnd);
+    val isTimeForEvening = isTimeInRange(currentTime, eveningStart,eveningEnd);
 
     if (hasMorning && hasEvening){
         return JournalEntryStatus.COMPLETE;

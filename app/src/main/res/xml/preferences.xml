@@ -12,4 +12,29 @@
         app:key="feedback"
         app:title="Send feedback"
         app:summary="Report technical issues or suggest new features"/>
+
+
+    <PreferenceCategory app:title="Input times">
+
+    <com.example.fiveminutejournal.TimePreference
+       app:key="morning_start"
+       app:title="Morning Start"
+       app:summary="Time when morning entry becomes enabled"
+       />
+        <com.example.fiveminutejournal.TimePreference
+            app:key="morning_end"
+            app:title="Morning End"
+            app:summary="Time when morning entry becomes disabled"
+            />
+        <com.example.fiveminutejournal.TimePreference
+            app:key="evening_start"
+            app:title="Evening Start"
+            app:summary="Time when evening entry becomes enabled"
+            />
+        <com.example.fiveminutejournal.TimePreference
+            app:key="evening_end"
+            app:title="Evening End"
+            app:summary="Time when evening entry becomes disabled"
+            />
+    </PreferenceCategory>
 </PreferenceScreen>

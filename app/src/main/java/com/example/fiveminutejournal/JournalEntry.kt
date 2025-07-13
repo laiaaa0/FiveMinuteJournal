@@ -1,5 +1,6 @@
 package com.example.fiveminutejournal
 
+import android.content.SharedPreferences
 import android.icu.text.SimpleDateFormat
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.preference.PreferenceManager
 import com.example.fiveminutejournal.databinding.FragmentSecondBinding
 import com.example.fiveminutejournal.DataManager
 import org.json.JSONObject
@@ -34,7 +36,7 @@ class JournalEntry : Fragment() {
 
     private lateinit var dataManager: DataManager
     private var status = JournalEntryStatus.NONE
-
+    private lateinit var preferences: SharedPreferences
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -46,11 +48,12 @@ class JournalEntry : Fragment() {
 
         val todayEntry :JSONObject = try{ dataManager.onRetrieveEntry(currentTime)} catch (e:Exception){JSONObject()}
 
-        status = makeStatus(todayEntry, currentTime);
+        preferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+        status = makeStatus(todayEntry, currentTime, preferences);
 
         if (status!=JournalEntryStatus.TIME_FOR_MORNING_ENTRY &&
             status!=JournalEntryStatus.TIME_FOR_EVENING_ENTRY){
-            val action = JournalEntryDirections.actionSecondFragmentToEntryComplete(toString(makeStatus(todayEntry, currentTime)))
+            val action = JournalEntryDirections.actionSecondFragmentToEntryComplete(toString(status))
             findNavController().navigate(action)
         }
         return binding.root
@@ -87,7 +90,7 @@ class JournalEntry : Fragment() {
             dataManager.onAddNewEntry(json, EntryType.kMorning);
             // Disable the button
             morningSaveButton.isEnabled = false
-            val action = JournalEntryDirections.actionSecondFragmentToEntryComplete(toString(makeStatus(dataManager.onRetrieveEntry(Date()),  Date())))
+            val action = JournalEntryDirections.actionSecondFragmentToEntryComplete(toString(makeStatus(dataManager.onRetrieveEntry(Date()),  Date(), preferences)))
             findNavController().navigate(action)
 
         }
@@ -102,7 +105,7 @@ class JournalEntry : Fragment() {
 
             // Disable the button
             eveningSaveButton.isEnabled = false
-            val action = JournalEntryDirections.actionSecondFragmentToEntryComplete(toString(makeStatus(dataManager.onRetrieveEntry(Date()),  Date())))
+            val action = JournalEntryDirections.actionSecondFragmentToEntryComplete(toString(makeStatus(dataManager.onRetrieveEntry(Date()),  Date(), preferences)))
             findNavController().navigate(action)
         }
 
